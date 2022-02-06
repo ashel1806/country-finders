@@ -7,6 +7,7 @@ const App = () => {
 
   useEffect(async () => {
     const countriesData = await getAllCountries();
+    console.log(countriesData);
     setCountries(countriesData);
   }, []);
 
@@ -14,7 +15,7 @@ const App = () => {
     <div>
       {countries.map(countrie => (
         <Country
-          key={countrie.name}
+          key={countrie.name.common}
           flags={countrie.flags}
           name={countrie.name}
           population={countrie.population}
