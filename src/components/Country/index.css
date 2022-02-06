@@ -1,0 +1,18 @@
+.country_wrapper {
+  min-width: 300px;
+  border: 2px;
+  border-color: black;
+  border-radius: 10px;
+}
+
+.country_container {
+  width: 100%;
+}
+
+.country_img__container {
+  border-radius: 10px;
+}
+
+.country_texts__container {
+  text-align: left;
+}
