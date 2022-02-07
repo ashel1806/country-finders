@@ -1,6 +1,18 @@
 import { useState, useEffect } from 'react';
 import { getAllCountries } from './utils/api';
+import styled from 'styled-components';
 import Country from './components/Country';
+import NavBar from './components/NavBar';
+import SearchInput from './components/SearchInput';
+import Select from './components/Select';
+
+import theme from './utils/theme';
+
+const Container = styled.div`
+  padding: 0 1em;
+  max-width: ${theme.screens.desktop};
+  margin: 0 auto;
+`;
 
 const App = () => {
   const [countries, setCountries] = useState([]);
@@ -12,18 +24,23 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      {countries.map(countrie => (
-        <Country
-          key={countrie.name.common}
-          flags={countrie.flags}
-          name={countrie.name}
-          population={countrie.population}
-          region={countrie.region}
-          capital={countrie.capital}
-        />
-      ))}
-    </div>
+    <>
+      <NavBar />
+      <Container>
+        <SearchInput />
+        <Select />
+        {countries.map(countrie => (
+          <Country
+            key={countrie.name.common}
+            flags={countrie.flags}
+            name={countrie.name}
+            population={countrie.population}
+            region={countrie.region}
+            capital={countrie.capital}
+          />
+        ))}
+      </Container>
+    </>
   );
 };
 

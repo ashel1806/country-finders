@@ -1,25 +1,40 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import theme from '../../utils/theme';
+
+const Container = styled.div`
+  padding: 0 1em;
+  margin-bottom: 2em;
+`;
+
 const CountryWrapper = styled.div`
-  min-width: 500px;
-  border: 2px solid black;
+  background-color: ${theme.colors.white};
+  max-width: 400px;
+  border-radius: .5em;
 `;
 
-const CountryContainer = styled.div`
+const Image = styled.img`
   width: 100%;
-  background-color: blue;
+  min-width: 250px;
+  border-radius: .5em .5em 0 0;
 `;
 
-const ImageContainer = styled.div`
-  width: 100%;
+const TextsContainer = styled.div`
+  padding: 1.5em
 `;
 
-const Text = styled.div`
-  color: red;
+const CountryName = styled.h3`
+  font-weight: ${theme.fontWeights['extra-bold']};
+  margin-bottom: 1em
+`;
+
+const Text = styled.p`
+  margin-bottom: .5em;
+  font-size: ${theme.fontSizes.homepage};
 
   & .secondary {
-    color: black !important;   
+    color: ${theme.colors.light['dark-gray']};  
   }
 `;
 
@@ -27,20 +42,23 @@ const Country = (props) => {
   const { flags, name, population, region, capital } = props;
 
   return (
-    <CountryWrapper>
-      <CountryContainer>
-        <ImageContainer>
-          <img src={flags.png}/>
-        </ImageContainer>
-        <div className='country_texts__container'>
-          <h3>{name.common}</h3>
-          <Text>Population: <span className='secondary'>{population}</span></Text>
-          <p>Population: <span>{population}</span></p>
-          <p>Region: <span>{region}</span></p>
-          <p>Capital: <span>{capital}</span></p>
-        </div>
-      </CountryContainer>
-    </CountryWrapper>
+    <Container>
+      <CountryWrapper>
+        <Image src={flags.png} alt={name.common}/>
+        <TextsContainer>
+          <CountryName>{name.common}</CountryName>
+          <Text>Population:{' '}
+            <span className='secondary'>{population}</span>
+          </Text>
+          <Text>Region:{' '}
+            <span className='secondary'>{region}</span>
+          </Text>
+          <Text>Capital:{' '}
+            <span className='secondary'>{capital}</span>
+          </Text>
+        </TextsContainer>
+      </CountryWrapper>
+    </Container>
   );
 };
 
