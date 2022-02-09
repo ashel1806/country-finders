@@ -36,7 +36,6 @@ const SearchInput = ({ handleSearch }) => {
 
   const handleSearchChange = (e) => {
     setValue(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleSubmit = async (e) => {
