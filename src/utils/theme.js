@@ -1,4 +1,4 @@
-export default {
+export const theme = {
   colors: {
     dark: {
       'dark-blue': 'hsl(209, 23%, 22%)',
@@ -23,5 +23,19 @@ export default {
   screens: {
     'mobile': '375px',
     'desktop': '1440px'
-  }
+  },
+};
+
+const screenSizes = {
+  mobile: '375px',
+  mobileM: '750px',
+  large: '1100px',
+  desktop: '1440px'
+};
+
+export const devices = {
+  mobile: `(min-width: ${screenSizes.mobile})`,
+  mobileM: `(min-width: ${screenSizes.mobileM})`,
+  large: `(min-width: ${screenSizes.large})`,
+  desktop: `(min-width: ${screenSizes.desktop})`
 };

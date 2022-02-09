@@ -1,6 +1,6 @@
 import propTypes from 'prop-types';
 import styled from 'styled-components';
-import theme from '../../utils/theme';
+import { theme } from '../../utils/theme';
 
 const Text = styled.h3`
   text-align: center;

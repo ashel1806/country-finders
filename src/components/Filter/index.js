@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
-import theme from '../../utils/theme';
+import { theme, devices } from '../../utils/theme';
 
 const Container = styled.div`
   position: relative;
   display: inline-block;
   margin-bottom: 1.75rem;
   text-align: left;
+
+  @media ${devices.large} {
+    margin: 1.5rem 0;
+  }
 `;
 
 const Button = styled.button`
@@ -16,7 +20,7 @@ const Button = styled.button`
   justify-content: center;
   width: 100%;
   border-radius: .5rem;
-  padding: .75rem 1.25rem;
+  padding: 20px 1.25rem;
   font-size: ${theme.fontSizes.homepage};
   color: black;
   cursor: pointer;

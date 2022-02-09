@@ -1,18 +1,26 @@
 import { useState, useEffect } from 'react';
 import { getAllCountries, getCountryByName, getCountriesByRegion } from './utils/api';
 import styled from 'styled-components';
-import Country from './components/Country';
+import Countries from './components/Countries';
 import NavBar from './components/NavBar';
 import SearchInput from './components/SearchInput';
 import Filter from './components/Filter';
 import Notification from './components/Notification';
 
-import theme from './utils/theme';
+import { theme, devices } from './utils/theme';
 
 const Container = styled.div`
   padding: 0 1em;
   max-width: ${theme.screens.desktop};
   margin: 0 auto;
+`;
+
+const FlexContainer = styled.div`
+  @media ${devices.large} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
 const App = () => {
@@ -39,7 +47,6 @@ const App = () => {
       setMessage('');
     } catch (ex) {
       setMessage('Country not found :(');
-      console.log(ex);
     }
   };
 
@@ -52,25 +59,18 @@ const App = () => {
     <>
       <NavBar />
       <Container>
-        <SearchInput
-          handleSearch={handleSearchCountry}
-        />
-        <Filter
-          options={options}
-          handleFilter={handleFilterCountriesByRegion}
-        />
+        <FlexContainer>
+          <SearchInput
+            handleSearch={handleSearchCountry}
+          />
+          <Filter
+            options={options}
+            handleFilter={handleFilterCountriesByRegion}
+          />
+        </FlexContainer>
         {message
-          ? <Notification message={message} />:
-          countries.map(countrie => (
-            <Country
-              key={countrie.name.common}
-              flags={countrie.flags}
-              name={countrie.name}
-              population={countrie.population}
-              region={countrie.region}
-              capital={countrie.capital}
-            />
-          ))
+          ? <Notification message={message} />
+          : <Countries countries={countries} />
         }
       </Container>
     </>
