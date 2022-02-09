@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getAllCountries } from './utils/api';
+import { getAllCountries, getCountryByName, getCountriesByRegion } from './utils/api';
 import styled from 'styled-components';
 import Country from './components/Country';
 import NavBar from './components/NavBar';
@@ -17,18 +17,40 @@ const Container = styled.div`
 const App = () => {
   const [countries, setCountries] = useState([]);
 
+  const options = [
+    { label: 'Africa', value: 'africa' },
+    { label: 'America', value: 'america' },
+    { label: 'Asia', value: 'asia' },
+    { label: 'Europe', value: 'europe' },
+    { label: 'Oceania', value: 'oceania' },
+  ];
+
   useEffect(async () => {
     const countriesData = await getAllCountries();
-    console.log(countriesData);
     setCountries(countriesData);
   }, []);
+
+  const handleSearchCountry = async (name) => {
+    const searchedCountries = await getCountryByName(name);
+    setCountries(searchedCountries);
+  };
+
+  const handleFilterCountriesByRegion = async (region) => {
+    const filteredCountries = await getCountriesByRegion(region);
+    setCountries(filteredCountries);
+  };
 
   return (
     <>
       <NavBar />
       <Container>
-        <SearchInput />
-        <Filter />
+        <SearchInput
+          handleSearch={handleSearchCountry}
+        />
+        <Filter
+          options={options}
+          handleFilter={handleFilterCountriesByRegion}
+        />
         {countries.map(countrie => (
           <Country
             key={countrie.name.common}

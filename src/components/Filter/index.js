@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import propTypes from 'prop-types';
 import styled from 'styled-components';
 import theme from '../../utils/theme';
 
@@ -56,20 +56,17 @@ const Option = styled.span`
   }
 `;
 
-const Filter = () => {
+const Filter = ({ handleFilter, options }) => {
   const [active, setActive] = useState(false);
 
   const handleClickActive = () => {
     setActive(!active);
   };
 
-  const options = [
-    { label: 'Africa', value: 'africa' },
-    { label: 'America', value: 'america' },
-    { label: 'Asia', value: 'asia' },
-    { label: 'Europe', value: 'europe' },
-    { label: 'Oceania', value: 'oceania' },
-  ];
+  const handleFilterCountries = (region) => {
+    handleFilter(region);
+    setActive(!active);
+  };
 
   return (
     <Container>
@@ -86,7 +83,7 @@ const Filter = () => {
           {options.map(option => (
             <Option
               key={option.value}
-              onClick={handleClickActive}
+              onClick={() => handleFilterCountries(option.value)}
             >
               {option.label}
             </Option>
@@ -98,3 +95,8 @@ const Filter = () => {
 };
 
 export default Filter;
+
+Filter.propTypes = {
+  handleFilter: propTypes.func.isRequired,
+  options: propTypes.array.isRequired
+};
