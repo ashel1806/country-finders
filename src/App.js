@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Country from './components/Country';
 import NavBar from './components/NavBar';
 import SearchInput from './components/SearchInput';
-import Select from './components/Select';
+import Filter from './components/Filter';
 
 import theme from './utils/theme';
 
@@ -28,7 +28,7 @@ const App = () => {
       <NavBar />
       <Container>
         <SearchInput />
-        <Select />
+        <Filter />
         {countries.map(countrie => (
           <Country
             key={countrie.name.common}

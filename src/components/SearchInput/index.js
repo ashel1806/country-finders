@@ -4,19 +4,20 @@ import theme from '../../utils/theme';
 const Container = styled.div`
   margin: 1.5em 0;
   max-width: 500px;
+  background-color: ${theme.colors.white};
+  font-size: ${theme.fontSizes.homepage};
 `;
 
 const Icon = styled.div`
+  padding: 23px 0;
+  margin-left: 1.5em;
   position: absolute;
-  padding: .8em 1em;
   color: ${theme.colors.light['dark-gray']};
-  font-weight: ${theme.fontWeights['extra-bold']}
+  font-weight: ${theme.fontWeights['extra-bold']};
+  width: 20px;
 `;
 
 const Input = styled.input`
-  border-radius: .5em;
-  background-color: ${theme.colors.white};
-  font-size: ${theme.fontSizes.homepage};
   width: 100%;
   padding: 20px 50px;
 
@@ -29,7 +30,7 @@ const SearchInput = () => {
   return (
     <Container>
       <Icon>
-        o
+        <i className="fa-solid fa-magnifying-glass"></i>
       </Icon>
       <Input
         placeholder='Search for a country...'
