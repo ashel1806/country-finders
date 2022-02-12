@@ -7,13 +7,11 @@ const Text = styled.h3`
   color: ${theme.colors.light['dark-gray']}
 `;
 
-const Notification = ({ message }) => {
+export default function Notification ({ message }) {
   return (
     <Text>{message}</Text>
   );
-};
-
-export default Notification;
+}
 
 Notification.propTypes = {
   message: propTypes.string.isRequired

@@ -37,7 +37,7 @@ const Input = styled.input`
   }
 `;
 
-const SearchInput = ({ handleSearch }) => {
+export default function SearchInput ({ handleSearch }) {
   const [value, setValue] = useState('');
 
   const handleSearchChange = (e) => {
@@ -61,9 +61,7 @@ const SearchInput = ({ handleSearch }) => {
       </IconButton>
     </FormContainer>
   );
-};
-
-export default SearchInput;
+}
 
 SearchInput.propTypes = {
   handleSearch: propTypes.func.isRequired

@@ -60,7 +60,7 @@ const Option = styled.span`
   }
 `;
 
-const Filter = ({ handleFilter, options }) => {
+export default function Filter ({ handleFilter, options }) {
   const [active, setActive] = useState(false);
 
   const handleClickActive = () => {
@@ -96,9 +96,7 @@ const Filter = ({ handleFilter, options }) => {
       </DropDown>
     </Container>
   );
-};
-
-export default Filter;
+}
 
 Filter.propTypes = {
   handleFilter: propTypes.func.isRequired,

@@ -18,7 +18,7 @@ const Title = styled.span`
   font-weight: ${theme.fontWeights.bold};
 `;
 
-const NavBar = () => {
+export default function NavBar () {
   return (
     <NavWrapper>
       <Container>
@@ -27,6 +27,4 @@ const NavBar = () => {
       </Container>
     </NavWrapper>
   );
-};
-
-export default NavBar;
+}

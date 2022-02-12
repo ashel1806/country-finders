@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { theme, devices } from '../../utils/theme';
 
 const Container = styled.div`
   padding: 0 1em;
   margin-bottom: 2em;
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 
   @media ${devices.mobileM} {
     padding: 0;
@@ -62,36 +68,38 @@ const Text = styled.p`
   }
 `;
 
-const Country = (props) => {
-  const { flags, name, population, region, capital } = props;
+export default function Country (props) {
+  const { flags, name, population, region, capital, code } = props;
+  const codeToLowerCase = code.toLowerCase();
 
   return (
     <Container>
-      <CountryWrapper>
-        <Image src={flags.svg} />
-        <TextsContainer>
-          <CountryName>{name.common}</CountryName>
-          <Text>Population:{' '}
-            <span className='secondary'>{population}</span>
-          </Text>
-          <Text>Region:{' '}
-            <span className='secondary'>{region}</span>
-          </Text>
-          <Text>Capital:{' '}
-            <span className='secondary'>{capital}</span>
-          </Text>
-        </TextsContainer>
-      </CountryWrapper>
+      <Link to={`/countries/${codeToLowerCase}`}>
+        <CountryWrapper>
+          <Image src={flags.svg} />
+          <TextsContainer>
+            <CountryName>{name}</CountryName>
+            <Text>Population:{' '}
+              <span className='secondary'>{population}</span>
+            </Text>
+            <Text>Region:{' '}
+              <span className='secondary'>{region}</span>
+            </Text>
+            <Text>Capital:{' '}
+              <span className='secondary'>{capital}</span>
+            </Text>
+          </TextsContainer>
+        </CountryWrapper>
+      </Link>
     </Container>
   );
-};
+}
 
 Country.propTypes = {
   flags: PropTypes.object.isRequired,
-  name: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired,
   population: PropTypes.number.isRequired,
   region: PropTypes.string.isRequired,
-  capital: PropTypes.array
+  capital: PropTypes.string,
+  code: PropTypes.string.isRequired
 };
-
-export default Country;

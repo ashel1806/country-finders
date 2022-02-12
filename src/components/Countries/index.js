@@ -22,24 +22,23 @@ const Container = styled.div`
   }
 `;
 
-const Countries = ({ countries }) => {
+export default function Countries ({ countries }) {
   return (
     <Container>
       {countries.map(country => (
         <Country
-          key={country.name.common}
+          key={country.name}
           flags={country.flags}
           name={country.name}
           population={country.population}
           region={country.region}
           capital={country.capital}
+          code={country.cioc || country.alpha3Code}
         />
       ))}
     </Container>
   );
-};
-
-export default Countries;
+}
 
 Countries.propTypes = {
   countries: propTypes.array.isRequired

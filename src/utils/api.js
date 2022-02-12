@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const baseCountriesCollectionUrl = axios.create({
-  baseURL: 'https://restcountries.com/v3.1/'
+  baseURL: 'https://restcountries.com/v2/'
 });
 
 export const getAllCountries = async () => {
@@ -21,6 +21,13 @@ export const getCountryByName = async (name) => {
 export const getCountriesByRegion = async (region) => {
   const countriesByRegion = await baseCountriesCollectionUrl.get(`/region/${region}`);
   const { data } = countriesByRegion;
+
+  return data;
+};
+
+export const getCountryByCode = async (code) => {
+  const countryByCode = await baseCountriesCollectionUrl.get(`/alpha/${code}`);
+  const { data } = countryByCode;
 
   return data;
 };
