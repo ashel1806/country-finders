@@ -71,6 +71,7 @@ const Text = styled.p`
 export default function Country (props) {
   const { flags, name, population, region, capital, code } = props;
   const codeToLowerCase = code.toLowerCase();
+  const formattedPopulationNumber = population.toLocaleString('en-US');
 
   return (
     <Container>
@@ -80,7 +81,7 @@ export default function Country (props) {
           <TextsContainer>
             <CountryName>{name}</CountryName>
             <Text>Population:{' '}
-              <span className='secondary'>{population}</span>
+              <span className='secondary'>{formattedPopulationNumber}</span>
             </Text>
             <Text>Region:{' '}
               <span className='secondary'>{region}</span>

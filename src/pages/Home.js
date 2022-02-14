@@ -35,7 +35,7 @@ export default function Home () {
 
   const options = [
     { label: 'Africa', value: 'africa' },
-    { label: 'America', value: 'america' },
+    { label: 'America', value: 'americas' },
     { label: 'Asia', value: 'asia' },
     { label: 'Europe', value: 'europe' },
     { label: 'Oceania', value: 'oceania' },

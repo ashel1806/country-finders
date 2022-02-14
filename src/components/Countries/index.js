@@ -33,7 +33,7 @@ export default function Countries ({ countries }) {
           population={country.population}
           region={country.region}
           capital={country.capital}
-          code={country.cioc || country.alpha3Code}
+          code={country.alpha3Code}
         />
       ))}
     </Container>
