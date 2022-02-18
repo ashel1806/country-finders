@@ -9,6 +9,8 @@ const Container = styled.div`
   padding: 0 1em;
   max-width: ${theme.screens.desktop};
   margin: 0 auto;
+  color: ${({ theme }) => theme['text']};
+  transition: all .5s linear;
 `;
 
 const LinkContainer = styled.div`
@@ -25,10 +27,9 @@ const Heading = styled.div`
 const Text = styled.p`
   margin-bottom: .8em;
   font-size: ${props => props.md ? '1.1em' : theme.fontSizes.detail};
-  font-weight: ${theme.fontWeights.bold};
 
   span {
-    font-weight: ${theme.fontWeights.normal};  
+    color: ${({ theme }) => theme['secondary-text']}
   }
   
   a {
@@ -46,7 +47,7 @@ const TextsRight = styled.div`
   margin-bottom: 1.5em;
 `;
 
-export default function CountryDetails ({ country }) {
+export default function CountryDetails ({ themeMode, country }) {
   const [borders, setBorders] = useState();
   const formattedPopulationNumber = country.population.toLocaleString('en-US');
   const languages = country.languages.map(language => language.name);
@@ -72,7 +73,7 @@ export default function CountryDetails ({ country }) {
   }, []);
 
   return (
-    <Container>
+    <Container theme={themeMode}>
       <LinkContainer>
         <LinkButton label='Back' url='/' icon/>
       </LinkContainer>
@@ -116,6 +117,7 @@ export default function CountryDetails ({ country }) {
         ? borders.map(border => (
           <LinkButton
             key={border.name}
+            themeMode={themeMode}
             url={`/countries/${border.code}`}
             label={border.name}
             size='tiny'
@@ -128,5 +130,6 @@ export default function CountryDetails ({ country }) {
 }
 
 CountryDetails.propTypes = {
+  themeMode: propTypes.object,
   country: propTypes.object.isRequired
 };

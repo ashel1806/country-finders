@@ -14,6 +14,7 @@ import Filter from '../components/Filter';
 import Notification from '../components/Notification';
 
 import { theme, devices } from '../utils/theme';
+import { func, object } from 'prop-types';
 
 const Container = styled.div`
   padding: 0 1em;
@@ -29,7 +30,7 @@ const FlexContainer = styled.div`
   }
 `;
 
-export default function Home () {
+export default function Home ({ themeMode, changeTheme }) {
   const [countries, setCountries] = useState([]);
   const [message, setMessage] = useState('');
 
@@ -63,22 +64,29 @@ export default function Home () {
 
   return (
     <>
-      <NavBar />
+      <NavBar themeMode={themeMode} setTheme={changeTheme}/>
       <Container>
         <FlexContainer>
           <SearchInput
+            themeMode={themeMode}
             handleSearch={handleSearchCountry}
           />
           <Filter
+            themeMode={themeMode}
             options={options}
             handleFilter={handleFilterCountriesByRegion}
           />
         </FlexContainer>
         {message
-          ? <Notification message={message} />
-          : <Countries countries={countries} />
+          ? <Notification message={message} themeMode={themeMode} />
+          : <Countries countries={countries} themeMode={themeMode} />
         }
       </Container>
     </>
   );
 }
+
+Home.propTypes = {
+  themeMode: object.isRequired,
+  changeTheme: func.isRequired
+};

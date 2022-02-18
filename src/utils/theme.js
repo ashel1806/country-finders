@@ -1,15 +1,17 @@
 export const theme = {
   colors: {
     dark: {
-      'dark-blue': 'hsl(209, 23%, 22%)',
-      'very-dark-blue': 'hsl(207, 26%, 17%)',
+      'background': 'hsl(209, 23%, 22%)',
+      'foreground': 'hsl(207, 26%, 17%)',
+      'text': 'hsl(0, 0%, 100%)',
+      'secondary-text': 'hsl(0, 0%, 85%)'
     },
     light: {
-      'very-dark-blue': 'hsl(200, 15%, 8%)',
-      'dark-gray': 'hsl(0, 0%, 52%)',
-      'very-dark-gray': 'hsl(0, 0%, 98%)'
+      'background': 'hsl(0, 0%, 100%)',
+      'foreground': 'hsl(0, 0%, 95%)',
+      'text': 'hsl(200, 15%, 8%)',
+      'secondary-text': 'hsl(0, 0%, 52%)',
     },
-    'white': 'hsl(0, 0%, 100%)'
   },
   fontSizes: {
     'homepage': '14px',

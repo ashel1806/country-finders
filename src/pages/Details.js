@@ -3,8 +3,9 @@ import { useParams } from 'react-router-dom';
 import { getCountryByCode } from '../utils/api';
 import NavBar from '../components/NavBar';
 import CountryDetails from '../components/CountryDetails';
+import { func, object } from 'prop-types';
 
-export default function Details () {
+export default function Details ({ themeMode, changeTheme }) {
   const [country, setCountry] = useState();
 
   let params = useParams();
@@ -26,8 +27,13 @@ export default function Details () {
 
   return (
     <>
-      <NavBar />
-      <CountryDetails country={country} />
+      <NavBar theme={themeMode} setTheme={changeTheme}/>
+      <CountryDetails theme={themeMode} country={country} />
     </>
   );
 }
+
+Details.propTypes = {
+  themeMode: object,
+  changeTheme: func.isRequired
+};

@@ -1,8 +1,11 @@
+/* eslint-disable no-unused-vars */
 import styled from 'styled-components';
+import { func, object } from 'prop-types';
 import { theme } from '../../utils/theme';
 
 const NavWrapper = styled.div`
-  background-color: ${theme.colors.white};
+  background-color: ${({ theme }) => theme['background']};
+  transition: all .5s linear;
 `;
 
 const Container = styled.div`
@@ -16,15 +19,40 @@ const Container = styled.div`
 
 const Title = styled.span`
   font-weight: ${theme.fontWeights.bold};
+  color: ${({ theme }) => theme['text']};
+  transition: all .5s linear;
 `;
 
-export default function NavBar () {
+const ThemeButton = styled.button`
+  text-decoration: none;
+  outline: none;
+  background-color transparent;
+  color: ${({ theme }) => theme['text']};
+  font-weight: ${theme.fontWeights.bold};
+  font-size: ${theme.fontSizes.homepage};
+  cursor: pointer;
+
+  i {
+    margin-right: .5em;
+  }
+`;
+
+export default function NavBar ({ themeMode, setTheme }) {
+  console.log(themeMode);
   return (
-    <NavWrapper>
+    <NavWrapper theme={themeMode}>
       <Container>
         <Title>Where in the world?</Title>
-        <button>Dark Mode</button>
+        <ThemeButton onClick={setTheme}>
+          <i className="fa-regular fa-moon"></i>
+          Dark Mode
+        </ThemeButton>
       </Container>
     </NavWrapper>
   );
 }
+
+NavBar.propTypes = {
+  themeMode: object,
+  setTheme: func.isRequired
+};

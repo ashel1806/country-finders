@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import propTypes from 'prop-types';
+import { func, array, object } from 'prop-types';
 import styled from 'styled-components';
 import { theme, devices } from '../../utils/theme';
 
@@ -15,15 +15,16 @@ const Container = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: ${theme.colors.white};
+  background-color: ${({ theme }) => theme['background']};
   display: inline-flex;
   justify-content: center;
   width: 100%;
   border-radius: .5rem;
-  padding: 20px 1.25rem;
+  padding: 17px 1.25rem;
   font-size: ${theme.fontSizes.homepage};
-  color: black;
+  color: ${({ theme }) => theme['text']};
   cursor: pointer;
+  transition: all .5s linear;
 
   & .icon {
     margin-left: 0.75rem;
@@ -40,7 +41,7 @@ const DropDown = styled.div`
   width: 100%;
   margin-top: .5rem;
   border-radius: .375rem;
-  background-color: ${theme.colors.white};
+  background-color: ${({ theme }) => theme['background']};
 
   & .py-1 {
     padding: .875rem 0;
@@ -49,7 +50,7 @@ const DropDown = styled.div`
 
 const Option = styled.span`
   display: block;
-  color: black;
+  color: ${({ theme }) => theme['text']};
   padding: .5rem 1.25rem;
   font-size: ${theme.fontSizes.homepage};
   line-height: 1.25rem;
@@ -60,7 +61,7 @@ const Option = styled.span`
   }
 `;
 
-export default function Filter ({ handleFilter, options }) {
+export default function Filter ({ themeMode, handleFilter, options }) {
   const [active, setActive] = useState(false);
 
   const handleClickActive = () => {
@@ -75,7 +76,7 @@ export default function Filter ({ handleFilter, options }) {
   return (
     <Container>
       <div>
-        <Button type='button' onClick={handleClickActive}>
+        <Button type='button' onClick={handleClickActive} theme={themeMode}>
           Filter by Region
           <svg className="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -99,6 +100,7 @@ export default function Filter ({ handleFilter, options }) {
 }
 
 Filter.propTypes = {
-  handleFilter: propTypes.func.isRequired,
-  options: propTypes.array.isRequired
+  themeMode: object,
+  handleFilter: func.isRequired,
+  options: array.isRequired
 };

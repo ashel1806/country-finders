@@ -6,11 +6,11 @@ import { theme } from '../../utils/theme';
 
 const StyledLink = styled(Link)`
   padding: .5em .8em;
-  background: ${theme.colors.white};
-  box-shadow: 0 0 10px 2px #cacaca};
+  background-color: ${({ theme }) => theme['background']};
+  box-shadow: 10px 10px 5px 10px ${({ theme }) => theme['foreground']};
   display: inline-block;
   text-decoration: none;
-  color: black;
+  color: ${({ theme }) => theme['secondary-text']};
   font-size: ${props => props.size === 'tiny' ? theme.fontSizes.homepage : '1em'};
   margin-right: 1em;
   margin-bottom: 1em;
@@ -24,10 +24,10 @@ const StyledLink = styled(Link)`
   }
 `;
 
-export default function LinkButton({ label, url, icon, size }) {
+export default function LinkButton({ themeMode, label, url, icon, size }) {
   return (
     <>
-      <StyledLink to={url} size={size}>
+      <StyledLink to={url} size={size} theme={themeMode}>
         {icon && <i className="fa-solid fa-arrow-left-long"></i>}
         {label}
       </StyledLink>
@@ -36,6 +36,7 @@ export default function LinkButton({ label, url, icon, size }) {
 }
 
 LinkButton.propTypes = {
+  themeMode: propTypes.object,
   label: propTypes.string.isRequired,
   url: propTypes.string.isRequired,
   icon: propTypes.bool,

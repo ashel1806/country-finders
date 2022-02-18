@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import propTypes from 'prop-types';
+import { func, object } from 'prop-types';
 
 import styled from 'styled-components';
 import { theme, devices } from '../../utils/theme';
@@ -8,7 +8,6 @@ const FormContainer = styled.form`
   margin: 1.5em 0;
   max-width: 500px;
   border-radius: 20px;
-  background-color: ${theme.colors.white};
   font-size: ${theme.fontSizes.homepage};
 
   @media ${devices.large} {
@@ -17,27 +16,31 @@ const FormContainer = styled.form`
 `;
 
 const IconButton = styled.button`
-  padding: 20px 0;
+  padding: 18px 0;
   margin-left: -70px;
-  background-color: ${theme.colors.white};
+  background-color: ${({ theme }) => theme['background']};
   position: absolute;
-  color: ${theme.colors.light['dark-gray']};
+  color: ${({ theme }) => theme['secondary-text']};
   font-weight: ${theme.fontWeights['extra-bold']};
   width: 20px;
   cursor: pointer;
+  transition: all .5s linear;
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 20px 50px;
   border-radius: .5rem;
+  background-color: ${({ theme }) => theme['background']};
+  transition: all .5s linear;
+  color: ${({ theme }) => theme['secondary-text']};
 
-  &:placeholder {
-    color: ${theme.colors.light['dark-gray']}
+  &::placeholder {
+    color: ${({ theme }) => theme['secondary-text']};
   }
 `;
 
-export default function SearchInput ({ handleSearch }) {
+export default function SearchInput ({ themeMode, handleSearch }) {
   const [value, setValue] = useState('');
 
   const handleSearchChange = (e) => {
@@ -50,11 +53,12 @@ export default function SearchInput ({ handleSearch }) {
   };
 
   return (
-    <FormContainer onSubmit={handleSubmit}>
+    <FormContainer theme={themeMode} onSubmit={handleSubmit}>
       <Input
         placeholder='Search for a country...'
         onChange={handleSearchChange}
         value={value}
+        theme={themeMode}
       />
       <IconButton>
         <i className="fa-solid fa-magnifying-glass"></i>
@@ -64,5 +68,6 @@ export default function SearchInput ({ handleSearch }) {
 }
 
 SearchInput.propTypes = {
-  handleSearch: propTypes.func.isRequired
+  themeMode: object,
+  handleSearch: func.isRequired
 };

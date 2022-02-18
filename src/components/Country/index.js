@@ -10,7 +10,6 @@ const Container = styled.div`
 
   a {
     text-decoration: none;
-    color: black;
   }
 
   @media ${devices.mobileM} {
@@ -19,11 +18,12 @@ const Container = styled.div`
 `;
 
 const CountryWrapper = styled.div`
-  background-color: ${theme.colors.white};
+  background-color: ${({ theme }) => theme['background']};
   max-width: 400px;
   margin-right: auto;
   margin-left: auto;
   border-radius: .5em;
+  transition: all .5s linear;
 
   @media ${devices.mobileM} {
     margin: 0;
@@ -51,34 +51,38 @@ const Image = styled.div.attrs(props => ({
 `;
 
 const TextsContainer = styled.div`
-  padding: 1.5em
+  padding: 1.5em;
+  color: ${({ theme }) => theme['text']};
+  trainsition: all .5s linear;
+
+  & .secondary {
+    font-weight: ${theme.fontWeights.normal};
+    color: ${({ theme }) => theme['secondary-text']};  
+  }
 `;
 
 const CountryName = styled.h3`
   font-weight: ${theme.fontWeights['extra-bold']};
-  margin-bottom: 1em
+  margin-bottom: 1em;
 `;
 
 const Text = styled.p`
   margin-bottom: .5em;
+  font-weight: ${theme.fontWeights.bold};
   font-size: ${theme.fontSizes.homepage};
-
-  & .secondary {
-    color: ${theme.colors.light['dark-gray']};  
-  }
 `;
 
 export default function Country (props) {
-  const { flags, name, population, region, capital, code } = props;
+  const { flags, name, population, region, capital, code, themeMode } = props;
   const codeToLowerCase = code.toLowerCase();
   const formattedPopulationNumber = population.toLocaleString('en-US');
 
   return (
-    <Container>
+    <Container theme={themeMode}>
       <Link to={`/countries/${codeToLowerCase}`}>
-        <CountryWrapper>
+        <CountryWrapper theme={themeMode}>
           <Image src={flags.svg} />
-          <TextsContainer>
+          <TextsContainer theme={themeMode} >
             <CountryName>{name}</CountryName>
             <Text>Population:{' '}
               <span className='secondary'>{formattedPopulationNumber}</span>
@@ -102,5 +106,6 @@ Country.propTypes = {
   population: PropTypes.number.isRequired,
   region: PropTypes.string.isRequired,
   capital: PropTypes.string,
-  code: PropTypes.string.isRequired
+  code: PropTypes.string.isRequired,
+  themeMode: PropTypes.object
 };
