@@ -7,13 +7,13 @@ import { theme } from '../../utils/theme';
 const StyledLink = styled(Link)`
   padding: .5em .8em;
   background-color: ${({ theme }) => theme['background']};
-  box-shadow: 10px 10px 5px 10px ${({ theme }) => theme['foreground']};
   display: inline-block;
   text-decoration: none;
   color: ${({ theme }) => theme['secondary-text']};
   font-size: ${props => props.size === 'tiny' ? theme.fontSizes.homepage : '1em'};
   margin-right: 1em;
   margin-bottom: 1em;
+  transition: all .5s linear;
 
   i {
     margin-right: .5em;
